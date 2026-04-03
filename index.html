@@ -1,0 +1,968 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thư viện Kỹ thuật Hộp số U340E — ĐH Bách Khoa TP.HCM</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Font Awesome 6 CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      crossorigin="anonymous"
+    />
+    <!-- Google Fonts: Barlow Condensed (display) + Lexend (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Lexend:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- =====================================================
+       SITE HEADER — Hiển thị ở mọi trang
+  ===================================================== -->
+    <header class="site-header" id="site-header">
+      <div class="header-inner">
+        <!-- Branding -->
+        <div class="header-brand">
+          <div class="header-logo">
+            <i class="fa-solid fa-gear"></i>
+          </div>
+          <div class="header-titles">
+            <span class="header-sup"
+              >ĐH Bách Khoa TP.HCM — Khoa Cơ khí Động lực</span
+            >
+            <h1 class="header-main">
+              Thư viện Kỹ thuật <strong>Hộp số U340E</strong>
+            </h1>
+          </div>
+        </div>
+
+        <!-- Nút quay lại (ẩn ở Home, hiện ở Detail) -->
+        <button
+          class="btn-back"
+          id="btn-back"
+          aria-label="Quay lại trang chủ"
+          onclick="goHome()"
+        >
+          <i class="fa-solid fa-arrow-left"></i>
+          <span>Trang chủ</span>
+        </button>
+      </div>
+
+      <!-- Breadcrumb bar -->
+      <div class="breadcrumb-bar" id="breadcrumb-bar">
+        <nav class="breadcrumb" aria-label="Breadcrumb điều hướng">
+          <button class="bc-item bc-home" onclick="goHome()">
+            <i class="fa-solid fa-house"></i> Trang chủ
+          </button>
+          <span class="bc-sep"><i class="fa-solid fa-chevron-right"></i></span>
+          <span class="bc-item bc-current" id="bc-current">—</span>
+        </nav>
+      </div>
+
+      <!-- Sub-menu ngang (chỉ hiện trên mobile khi vào Detail) -->
+      <nav
+        class="mobile-submenu"
+        id="mobile-submenu"
+        aria-label="Mục lục ngang"
+        role="tablist"
+      >
+        <!-- Render bởi JS -->
+      </nav>
+    </header>
+
+    <!-- =====================================================
+       VIEW 1 : HOME DASHBOARD
+  ===================================================== -->
+    <main class="view" id="view-home" data-view="home">
+      <!-- Hero Banner -->
+      <section class="hero-banner" aria-label="Giới thiệu">
+        <div class="hero-content">
+          <p class="hero-eyebrow">
+            <i class="fa-solid fa-book-open-reader"></i>
+            Tài liệu kỹ thuật chuyên sâu
+          </p>
+          <h2 class="hero-title">
+            Toyota U340E
+            <span>Automatic Transaxle</span>
+          </h2>
+          <p class="hero-desc">
+            Hệ thống tra cứu tích hợp: kết cấu, điều khiển, nguyên lý, quy trình
+            bảo dưỡng và chẩn đoán lỗi.
+          </p>
+        </div>
+        <div class="hero-badge" aria-hidden="true">
+          <div class="badge-ring">
+            <span class="badge-code">U340E</span>
+            <span class="badge-sub">4-Speed AT</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quick-stats bar -->
+      <div class="stats-bar" aria-label="Thống kê nhanh">
+        <div class="stat-item">
+          <span class="stat-val">5</span>
+          <span class="stat-label">Chủ đề chính</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-val">20+</span>
+          <span class="stat-label">Mục con</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-val">4</span>
+          <span class="stat-label">Cấp số tiến</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-val">OD</span>
+          <span class="stat-label">Overdrive</span>
+        </div>
+      </div>
+
+      <!-- ====================================================
+         DASHBOARD CARDS GRID
+    ==================================================== -->
+      <section class="dashboard-grid" aria-label="Danh mục chính">
+        <!-- ── Card 1 : Kết cấu hộp số ── -->
+        <article
+          class="dash-card"
+          data-section="1"
+          role="button"
+          tabindex="0"
+          aria-label="Kết cấu hộp số U340E"
+          onclick="openSection(1)"
+          onkeydown="keyActivate(event, 1)"
+        >
+          <div
+            class="card-accent-bar"
+            style="--bar-color: var(--primary)"
+          ></div>
+          <div class="card-icon-wrap" style="--icon-bg: #e8f0fb">
+            <i class="fa-solid fa-cubes" style="color: var(--primary)"></i>
+          </div>
+          <div class="card-body">
+            <span class="card-num">01</span>
+            <h3 class="card-title">Kết cấu hộp số U340E</h3>
+            <p class="card-desc">
+              Kết cấu tổng thể, biến mô, bơm dầu, bánh răng hành tinh và các
+              phần tử điều khiển.
+            </p>
+            <ul class="card-tags" aria-label="Mục con">
+              <li>Kết cấu chung</li>
+              <li>Biến mô thủy lực</li>
+              <li>Bơm dầu thủy lực</li>
+              <li>+2 mục</li>
+            </ul>
+          </div>
+          <div class="card-arrow" aria-hidden="true">
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+        </article>
+
+        <!-- ── Card 2 : Điều khiển & Thủy lực ── -->
+        <article
+          class="dash-card"
+          data-section="2"
+          role="button"
+          tabindex="0"
+          aria-label="Hệ thống điều khiển và thủy lực"
+          onclick="openSection(2)"
+          onkeydown="keyActivate(event, 2)"
+        >
+          <div class="card-accent-bar" style="--bar-color: #0277bd"></div>
+          <div class="card-icon-wrap" style="--icon-bg: #e1f5fe">
+            <i class="fa-solid fa-sliders" style="color: #0277bd"></i>
+          </div>
+          <div class="card-body">
+            <span class="card-num">02</span>
+            <h3 class="card-title">Hệ thống Điều khiển &amp; Thủy lực</h3>
+            <p class="card-desc">
+              Mạch thủy lực điều áp và hệ thống điện tử ECT quản lý quá trình
+              sang số tự động.
+            </p>
+            <ul class="card-tags" aria-label="Mục con">
+              <li>ĐK Thủy lực</li>
+              <li>ĐK Điện tử</li>
+            </ul>
+          </div>
+          <div class="card-arrow" aria-hidden="true">
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+        </article>
+
+        <!-- ── Card 3 : Nguyên lý làm việc ── -->
+        <article
+          class="dash-card"
+          data-section="3"
+          role="button"
+          tabindex="0"
+          aria-label="Nguyên lý làm việc các cấp số"
+          onclick="openSection(3)"
+          onkeydown="keyActivate(event, 3)"
+        >
+          <div class="card-accent-bar" style="--bar-color: #00796b"></div>
+          <div class="card-icon-wrap" style="--icon-bg: #e0f2f1">
+            <i class="fa-solid fa-gears" style="color: #00796b"></i>
+          </div>
+          <div class="card-body">
+            <span class="card-num">03</span>
+            <h3 class="card-title">Nguyên lý Làm việc</h3>
+            <p class="card-desc">
+              Phân tích dòng lực từng cấp số: số 1, 2, 3, số 4 (OD), số lùi và
+              tính tỉ số truyền.
+            </p>
+            <ul class="card-tags" aria-label="Mục con">
+              <li>Số 1 (D/3/2 và L)</li>
+              <li>Số 2 (D/3 và 2)</li>
+              <li>Số 3 (D/3)</li>
+              <li>Số 4 OD (D)</li>
+              <li>Số lùi (R)</li>
+              <li>Tỉ số truyền</li>
+            </ul>
+          </div>
+          <div class="card-arrow" aria-hidden="true">
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+        </article>
+
+        <!-- ── Card 4 : Quy trình tháo lắp ── -->
+        <article
+          class="dash-card"
+          data-section="4"
+          role="button"
+          tabindex="0"
+          aria-label="Quy trình tháo lắp và bảo dưỡng"
+          onclick="openSection(4)"
+          onkeydown="keyActivate(event, 4)"
+        >
+          <div class="card-accent-bar" style="--bar-color: #6a1b9a"></div>
+          <div class="card-icon-wrap" style="--icon-bg: #f3e5f5">
+            <i
+              class="fa-solid fa-screwdriver-wrench"
+              style="color: #6a1b9a"
+            ></i>
+          </div>
+          <div class="card-body">
+            <span class="card-num">04</span>
+            <h3 class="card-title">Quy trình Tháo lắp</h3>
+            <p class="card-desc">
+              Hướng dẫn từng bước: quy trình tháo rời hoàn toàn và lắp ráp cụm
+              hộp số đúng kỹ thuật.
+            </p>
+            <ul class="card-tags" aria-label="Mục con">
+              <li>4.1 Tháo</li>
+              <li>4.2 Lắp</li>
+            </ul>
+          </div>
+          <div class="card-arrow" aria-hidden="true">
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+        </article>
+
+        <!-- ── Card 5 : Chẩn đoán lỗi (ACCENT) ── -->
+        <article
+          class="dash-card dash-card--accent"
+          data-section="5"
+          role="button"
+          tabindex="0"
+          aria-label="Chẩn đoán lỗi và hướng bảo dưỡng"
+          onclick="openSection(5)"
+          onkeydown="keyActivate(event, 5)"
+        >
+          <div class="card-accent-bar" style="--bar-color: var(--accent)"></div>
+          <div class="card-icon-wrap" style="--icon-bg: #fff3e0">
+            <i
+              class="fa-solid fa-triangle-exclamation"
+              style="color: var(--accent)"
+            ></i>
+          </div>
+          <div class="card-body">
+            <span class="card-num">05</span>
+            <h3 class="card-title">Chẩn đoán Lỗi &amp; Hướng Bảo dưỡng</h3>
+            <p class="card-desc">
+              Bảng mã lỗi DTC, triệu chứng hư hỏng, nguyên nhân và phương án
+              khắc phục toàn diện.
+            </p>
+            <ul class="card-tags" aria-label="Mục con">
+              <li>Mã lỗi DTC</li>
+              <li>Triệu chứng</li>
+              <li>Khắc phục</li>
+            </ul>
+          </div>
+          <div class="card-arrow" aria-hidden="true">
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+        </article>
+      </section>
+      <!-- /.dashboard-grid -->
+
+      <!-- Footer trang chủ -->
+      <footer class="home-footer">
+        <p>
+          <i class="fa-solid fa-circle-info"></i>
+          Tài liệu phục vụ mục đích học tập &amp; nghiên cứu — ĐH Bách Khoa
+          TP.HCM.
+        </p>
+      </footer>
+    </main>
+    <!-- /#view-home -->
+
+    <!-- =====================================================
+       VIEW 2 : DETAIL PAGE (dùng chung cho 5 sections)
+  ===================================================== -->
+    <main class="view" id="view-detail" data-view="detail" aria-hidden="true">
+      <div class="detail-layout">
+        <!-- ── SIDEBAR (desktop) ── -->
+        <aside class="detail-sidebar" id="detail-sidebar" aria-label="Mục lục">
+          <div class="sidebar-header">
+            <i class="fa-solid fa-list-ul"></i>
+            <span>Mục lục</span>
+          </div>
+          <nav class="sidebar-nav" id="sidebar-nav" role="tablist">
+            <!-- Render bởi JS theo section active -->
+          </nav>
+        </aside>
+
+        <!-- ── CONTENT AREA ── -->
+        <section
+          class="detail-content"
+          id="detail-content"
+          role="tabpanel"
+          aria-live="polite"
+          tabindex="0"
+        >
+          <!-- Tiêu đề mục hiện tại -->
+          <div class="content-header" id="content-header">
+            <div class="content-icon-wrap" id="content-icon-wrap">
+              <i class="fa-solid fa-file-lines"></i>
+            </div>
+            <div>
+              <p class="content-section-label" id="content-section-label">
+                Chủ đề
+              </p>
+              <h2 class="content-title" id="content-title">Tiêu đề mục</h2>
+            </div>
+          </div>
+
+          <!-- ============================================================
+             CONTENT BODY — Mỗi .sub-panel tương ứng 1 mục con
+             data-section="X" data-sub="X.Y"
+
+             ► HƯỚNG DẪN CHÈN NỘI DUNG:
+               Thay khối [div.placeholder-block] bên trong mỗi
+               .sub-panel bằng nội dung thực tế (hình ảnh, bảng, text).
+               Giữ nguyên .sub-panel và các data-attribute.
+        ============================================================ -->
+          <div class="content-body" id="content-body">
+            <!-- ╔══════════════════════════════════╗
+               ║  SECTION 1 — Kết cấu hộp số     ║
+               ╚══════════════════════════════════╝ -->
+            <div
+              id="sub-1-1"
+              class="sub-panel"
+              data-section="1"
+              data-sub="1.1"
+              aria-labelledby="cnfCurrent"
+            >
+              <h2 class="ch-title">1.1 Kết cấu chung</h2>
+
+              <div class="content-box">
+                <p>
+                  Hộp số tự động U340E thuộc nhóm hộp số tự động 4 cấp dạng
+                  <strong>transaxle</strong> (hộp số - truyền lực cuối - vi sai
+                  tích hợp trong cùng vỏ), thường bố trí trên các xe dẫn động
+                  cầu trước dùng động cơ 1NZ-FE. Về mặt kết cấu, U340E tổ chức
+                  dòng công suất theo chuỗi:
+                  <em
+                    >động cơ → biến mô thủy lực (có ly hợp khóa biến mô) → trục
+                    sơ cấp → cụm bánh răng hành tinh kiểu CR-CR + bộ bánh răng
+                    trung gian → truyền lực cuối + vi sai → bán trục</em
+                  >.
+                </p>
+                <p style="margin-top: 0.5rem">
+                  Để tạo các cấp số, hộp số phối hợp 3 ly hợp ma sát (C1, C2,
+                  C3), 3 phanh (B1, B2, B3) và 2 khớp một chiều (F1, F2).
+                </p>
+              </div>
+
+              <figure style="text-align: center; margin: 1.5rem 0">
+                <img
+                  src="./image/Sơ đồ bố trí tổng thể hộp số U340E.jpg"
+                  alt="Sơ đồ bố trí tổng thể hộp số U340E"
+                  style="
+                    max-width: 100%;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                  "
+                />
+                <figcaption
+                  style="
+                    margin-top: 0.5rem;
+                    font-style: italic;
+                    color: var(--text-body);
+                  "
+                >
+                  Hình 1.1: Sơ đồ bố trí tổng thể hộp số U340E
+                </figcaption>
+              </figure>
+
+              <div class="image-legend">
+                <ol class="two-column-list">
+                  <li>Trục sơ cấp</li>
+                  <li>Bơm dầu</li>
+                  <li>Biến mô thủy lực</li>
+                  <li>Bánh răng mặt trời trước</li>
+                  <li>Bánh răng hành tinh trước</li>
+                  <li>Cần dẫn trước</li>
+                  <li>Bánh răng bao trước</li>
+                  <li>Bánh răng bao sau</li>
+                  <li>Bánh răng mặt trời sau</li>
+                  <li>Cần dẫn sau</li>
+                  <li>Bánh răng hành tinh sau</li>
+                  <li>Bánh răng chủ động</li>
+                  <li>Bánh răng bị động</li>
+                </ol>
+              </div>
+
+              <figure style="text-align: center; margin: 1.5rem 0">
+                <img
+                  src="./image/Sơ đồ bố trí tổng thể hộp số U340E thực tế.jpg"
+                  alt="Ảnh thực tế U340E"
+                  style="
+                    max-width: 100%;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                  "
+                />
+                <figcaption
+                  style="
+                    margin-top: 0.5rem;
+                    font-style: italic;
+                    color: var(--text-body);
+                  "
+                >
+                  Hình 1.2: Sơ đồ bố trí tổng thể hộp số U340E (Thực tế)
+                </figcaption>
+              </figure>
+
+              <div class="content-box">
+                <h3
+                  style="
+                    font-size: 1.1rem;
+                    color: var(--primary);
+                    margin-bottom: 0.5rem;
+                  "
+                >
+                  a) Vỏ hộp số và bố trí tổng thành
+                </h3>
+                <p>
+                  U340E dùng vỏ hợp kim nhôm dạng hai nửa (thân chính và nắp/đai
+                  bắt), bên trong chia khoang rõ ràng cho từng nhóm cụm: khoang
+                  biến mô - bơm dầu ở phía trước (gần động cơ), khoang cơ cấu
+                  hành tinh và phần tử ma sát ở vùng giữa, khoang truyền lực
+                  cuối - vi sai ở phía sau. Cách bố trí này giúp rút ngắn chiều
+                  dài theo phương dọc xe nhưng vẫn đảm bảo đồng tâm giữa trục sơ
+                  cấp và cụm cơ cấu hành tinh, đồng thời dễ tổ chức các đường
+                  dầu trong thân van và thân hộp.
+                </p>
+                <p style="margin-top: 0.75rem">
+                  Trong tài liệu tính toán, sơ đồ bố trí U340E được liệt kê theo
+                  thứ tự các cụm chính:
+                  <strong
+                    >(1) trục sơ cấp, (2) bơm, (3) biến mô, (4) bánh răng mặt
+                    trời trước, (5) bánh răng hành tinh trước, (6) cần dẫn
+                    trước, (7) bánh răng bao trước, (8) bánh răng bao sau, (9)
+                    bánh răng mặt trời sau...</strong
+                  >
+                  Việc đặt tên - định vị này rất quan trọng vì toàn bộ logic lắp
+                  ráp và tạo số của U340E thực chất là
+                  <strong>khóa - nối</strong> các phần tử vừa nêu bằng ly
+                  hợp/phanh.
+                </p>
+
+                <!-- Hình 1.3 — Hộp số U340E (ảnh thực tế vỏ hộp số) -->
+                <figure style="text-align: center; margin: 1.5rem 0">
+                  <img
+                    src="./image/Hộp số U340E.jpg"
+                    alt="Hộp số U340E"
+                    style="
+                      max-width: 100%;
+                      border-radius: 8px;
+                      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                    "
+                  />
+                  <figcaption
+                    style="
+                      margin-top: 0.5rem;
+                      font-style: italic;
+                      color: var(--text-body);
+                    "
+                  >
+                    Hình 1.3: Hộp số U340E
+                  </figcaption>
+                </figure>
+
+                <h3
+                  style="
+                    font-size: 1.1rem;
+                    color: var(--primary);
+                    margin-top: 1.5rem;
+                    margin-bottom: 0.5rem;
+                  "
+                >
+                  b) Cụm nguồn thủy lực và đáy các-te dầu
+                </h3>
+                <p>
+                  Nguồn năng lượng điều khiển (áp suất dầu) do bơm dầu tạo ra.
+                  Dầu hộp số được chứa ở các-te, qua lưới lọc, được bơm hút lên
+                  để tạo áp suất đường chính, sau đó phân phối qua thân van
+                  (valve body) tới các cơ cấu chấp hành (piston ly hợp/phanh) và
+                  các kênh bôi trơn - làm mát. Ở góc nhìn tổng quan, bơm dầu,
+                  thân van và các đường dầu tạo thành hệ mạch tuần hoàn, còn các
+                  ly hợp/phanh là phần tử tiêu thụ áp suất để biến năng lượng
+                  thủy lực thành lực ép ma sát.
+                </p>
+
+                <h3
+                  style="
+                    font-size: 1.1rem;
+                    color: var(--primary);
+                    margin-top: 1.5rem;
+                    margin-bottom: 0.5rem;
+                  "
+                >
+                  c) Cụm truyền lực cơ khí: cơ cấu hành tinh + truyền lực cuối
+                </h3>
+                <p>
+                  Về cơ khí, U340E dùng
+                  <strong>hai bộ truyền hành tinh đơn giản</strong> và
+                  <strong>một cặp bánh răng trung gian</strong>, được tổ chức
+                  theo kiểu <strong>CR-CR</strong> (cần dẫn của bộ này liên hệ
+                  với bánh răng bao của bộ kia), nhờ vậy chỉ với số lượng phần
+                  tử ma sát vừa phải vẫn tạo được 4 số tiến và 1 số lùi. Truyền
+                  lực cuối và vi sai đặt chung trong vỏ, nhận mô-men từ trục
+                  ra/cụm cuối của cơ cấu hành tinh qua cặp bánh răng truyền lực
+                  cuối rồi phân phối ra 2 bán trục.
+                </p>
+
+                <h3
+                  style="
+                    font-size: 1.1rem;
+                    color: var(--primary);
+                    margin-top: 1.5rem;
+                    margin-bottom: 0.5rem;
+                  "
+                >
+                  d) Nhóm phần tử điều khiển (ma sát) và triết lý thiết kế
+                </h3>
+                <p>
+                  U340E sử dụng triết lý ít phần tử nhưng đa nhiệm:
+                  <strong>C1</strong> tham gia gần như toàn bộ dải số tiến;
+                  <strong>C2</strong> đảm nhiệm truyền thẳng/OD tùy tổ hợp khóa;
+                  <strong>C3</strong> dành riêng cho số lùi. Các phanh
+                  <strong>B1-B3</strong> và khớp một chiều
+                  <strong>F1-F2</strong> giúp tạo điều kiện khóa một phần tử
+                  hành tinh theo một chiều hoặc cố định theo hai chiều.
+                </p>
+                <p style="margin-top: 0.75rem">
+                  Bảng chức năng cơ bản của từng phần tử thể hiện rõ vai trò nối
+                  - giữ: C1 nối trục trung gian với mặt trời trước; C2 nối trục
+                  trung gian với cần dẫn sau; C3 nối trục trung gian với mặt
+                  trời sau; B1 giữ mặt trời sau; B3 giữ bao trước và cần dẫn
+                  sau; F1/F2 ngăn quay ngược theo các điều kiện nhất định.
+                </p>
+              </div>
+
+              <div class="table-responsive">
+                <table class="content-table">
+                  <caption>
+                    Bảng 1.1: Nhóm phần tử chính và vai trò trong kết cấu U340E
+                  </caption>
+                  <colgroup>
+                    <col style="width: 22%" />
+                    <col style="width: 33%" />
+                    <col style="width: 45%" />
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th>Nhóm</th>
+                      <th>Thành phần tiêu biểu</th>
+                      <th>Vai trò kết cấu - chức năng</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Truyền lực thủy lực đầu vào</td>
+                      <td>Biến mô + lock-up</td>
+                      <td>
+                        Khuếch đại mô-men khi khởi hành, triệt trượt khi chạy ổn
+                        định.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Nguồn áp suất</td>
+                      <td>Bơm dầu, các-te, lọc</td>
+                      <td>
+                        Tạo áp và cấp dầu cho chấp hành + bôi trơn/làm mát.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Truyền lực cơ khí</td>
+                      <td>
+                        2 bộ hành tinh + bánh răng trung gian + truyền lực
+                        cuối/vi sai
+                      </td>
+                      <td>Tạo tỉ số truyền và đưa mô-men ra bánh xe.</td>
+                    </tr>
+                    <tr>
+                      <td>Điều khiển cơ khí (ma sát)</td>
+                      <td>C1, C2, C3; B1, B2, B3; F1, F2</td>
+                      <td>
+                        Nối/khóa phần tử hành tinh để hình thành từng cấp số.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Điều khiển thủy lực - điện</td>
+                      <td>Thân van, solenoid</td>
+                      <td>Phân phối áp suất theo chiến lược chuyển số.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- /#sub-1-1 -->
+
+            <div class="sub-panel" id="sub-1-2" data-section="1" data-sub="1.2">
+              <div class="placeholder-block">
+                <i class="fa-solid fa-circle-nodes placeholder-icon"></i>
+                <h4>1.2 — Biến mô thủy lực (Torque Converter)</h4>
+                <p class="placeholder-hint">
+                  ✏️ Chèn: Kết cấu biến mô (bơm, turbine, stator, ly hợp khóa),
+                  nguyên lý truyền momen thủy lực, đặc tính khuếch đại, hoạt
+                  động lock-up clutch khi tốc độ ổn định.
+                </p>
+                <div class="placeholder-skeleton">
+                  <div class="skel skel-wide"></div>
+                  <div class="skel skel-mid"></div>
+                  <div class="skel skel-wide"></div>
+                </div>
+              </div>
+            </div>
+            <!-- /#sub-1-2 -->
+
+            <div class="sub-panel" id="sub-1-3" data-section="1" data-sub="1.3">
+              <div class="placeholder-block">
+                <i class="fa-solid fa-droplet placeholder-icon"></i>
+                <h4>1.3 — Bơm dầu thủy lực (Oil Pump)</h4>
+                <p class="placeholder-hint">
+                  ✏️ Chèn: Kết cấu bơm dầu loại cánh gạt dẫn động từ vỏ biến mô,
+                  thông số áp suất làm việc, quy trình kiểm tra khe hở bơm, vai
+                  trò cấp áp cho mạch thủy lực điều khiển.
+                </p>
+                <div class="placeholder-skeleton">
+                  <div class="skel skel-wide"></div>
+                  <div class="skel skel-short"></div>
+                  <div class="skel skel-wide"></div>
+                </div>
+              </div>
+            </div>
+            <!-- /#sub-1-3 -->
+
+            <div class="sub-panel" id="sub-1-4" data-section="1" data-sub="1.4">
+              <div class="placeholder-block">
+                <i class="fa-solid fa-asterisk placeholder-icon"></i>
+                <h4>1.4 — Bộ truyền bánh răng hành tinh (Planetary Gearset)</h4>
+                <p class="placeholder-hint">
+                  ✏️ Chèn: Sơ đồ cụm CR-CR (hai bộ hành tinh nối tiếp), phân
+                  tích các phần tử: bánh răng mặt trời, bánh răng bao, cần dẫn,
+                  bánh răng hành tinh — nguyên lý tạo các tỉ số truyền khác
+                  nhau.
+                </p>
+                <div class="placeholder-skeleton">
+                  <div class="skel skel-wide"></div>
+                  <div class="skel skel-mid"></div>
+                  <div class="skel skel-mid"></div>
+                </div>
+              </div>
+            </div>
+            <!-- /#sub-1-4 -->
+
+            <div class="sub-panel" id="sub-1-5" data-section="1" data-sub="1.5">
+              <div class="placeholder-block">
+                <i class="fa-solid fa-circle-dot placeholder-icon"></i>
+                <h4>1.5 — Phần tử điều khiển: Ly hợp — Phanh — Khớp 1 chiều</h4>
+                <p class="placeholder-hint">
+                  ✏️ Chèn: Bảng phần tử gài C1, C2, C3 (ly hợp), B1, B2, B3
+                  (phanh), F1, F2 (khớp 1 chiều) — trạng thái ON/OFF theo từng
+                  cấp số, kết cấu đĩa ma sát, piston thủy lực, lò xo hồi vị.
+                </p>
+                <div class="placeholder-skeleton">
+                  <div class="skel skel-wide"></div>
+                  <div class="skel skel-wide"></div>
+                  <div class="skel skel-short"></div>
+                </div>
+              </div>
+            </div>
+            <!-- /#sub-1-5 -->
+
+            <!-- ╔══════════════════════════════════════════════╗
+               ║  SECTION 2 — Hệ thống điều khiển & thủy lực ║
+               ╚══════════════════════════════════════════════╝ -->
+            <div class="sub-panel" id="sub-2-1" data-section="2" data-sub="2.1">
+              <div class="placeholder-block">
+                <i class="fa-solid fa-water placeholder-icon"></i>
+                <h4>2.1 — Hệ Thống Điều Khiển Thủy Lực</h4>
+                <p class="placeholder-hint">
+                  ✏️ Chèn: Sơ đồ mạch thủy lực, van điều áp chính, van chuyển số
+                  1-2, 2-3, 3-4, mạch solenoid
+                </p>
+                <div class="placeholder-skeleton">
+                  <div class="skel skel-wide"></div>
+                  <div class="skel skel-mid"></div>
+                  <div class="skel skel-wide"></div>
+                  <div class="skel skel-short"></div>
+                </div>
+              </div>
+            </div>
+            <!-- /#sub-2-1 -->
+
+            <div class="sub-panel" id="sub-2-2" data-section="2" data-sub="2.2">
+              <div class="placeholder-block">
+                <i class="fa-solid fa-microchip placeholder-icon"></i>
+                <h4>
+                  2.2 — Hệ Thống Điều Khiển Điện Tử (ECT — Electronic Control
+                  Transmission)
+                </h4>
+                <p class="placeholder-hint">
+                  ✏️ Chèn: Sơ đồ ECT ECU, cảm biến đầu vào (tốc độ, throttle,
+                  nhiệt độ), solenoid đầu ra, bảng chân lý
+                </p>
+                <div class="placeholder-skeleton">
+                  <div class="skel skel-wide"></div>
+                  <div class="skel skel-mid"></div>
+                  <div class="skel skel-wide"></div>
+                </div>
+              </div>
+            </div>
+            <!-- /#sub-2-2 -->
+
+            <!-- ╔═══════════════════════════════════════╗
+               ║  SECTION 3 — Nguyên lý làm việc       ║
+               ╚═══════════════════════════════════════╝ -->
+            <div class="sub-panel" id="sub-3-1" data-section="3" data-sub="3.1">
+              <div class="placeholder-block">
+                <i class="fa-solid fa-1 placeholder-icon"></i>
+                <h4>
+                  3.1 — Tay số 1 (D/3/2) và Tay số 1 (L) — Khuếch đại mômen lớn
+                  nhất
+                </h4>
+                <p class="placeholder-hint">
+                  ✏️ Chèn: Sơ đồ dòng lực số 1, phần tử gài, tỉ số truyền i₁,
+                  hướng quay các trục. Phân biệt chế độ D/3/2 và chế độ L (giữ
+                  số 1).
+                </p>
+                <div class="placeholder-skeleton">
+                  <div class="skel skel-wide"></div>
+                  <div class="skel skel-mid"></div>
+                  <div class="skel skel-short"></div>
+                </div>
+              </div>
+            </div>
+            <!-- /#sub-3-1 -->
+
+            <div class="sub-panel" id="sub-3-2" data-section="3" data-sub="3.2">
+              <div class="placeholder-block">
+                <i class="fa-solid fa-2 placeholder-icon"></i>
+                <h4>
+                  3.2 — Tay số 2 (dải D/3) và Tay số 2 (dải 2) — Chuyển tiếp,
+                  cân bằng lực kéo và tốc độ
+                </h4>
+                <p class="placeholder-hint">
+                  ✏️ Chèn: Sơ đồ dòng lực số 2, phần tử gài, tỉ số truyền i₂.
+                  Phân biệt chế độ dải D/3 và dải 2 (hãm máy khi xuống dốc).
+                </p>
+                <div class="placeholder-skeleton">
+                  <div class="skel skel-wide"></div>
+                  <div class="skel skel-mid"></div>
+                </div>
+              </div>
+            </div>
+            <!-- /#sub-3-2 -->
+
+            <div class="sub-panel" id="sub-3-3" data-section="3" data-sub="3.3">
+              <div class="placeholder-block">
+                <i class="fa-solid fa-3 placeholder-icon"></i>
+                <h4>
+                  3.3 — Tay số 3 (dải D/3) — Truyền gần trực tiếp (hiệu suất
+                  tốt)
+                </h4>
+                <p class="placeholder-hint">
+                  ✏️ Chèn: Sơ đồ dòng lực số 3, phần tử gài, tỉ số truyền i₃.
+                  Phân tích lý do hiệu suất cơ học cao ở tay số này.
+                </p>
+                <div class="placeholder-skeleton">
+                  <div class="skel skel-wide"></div>
+                  <div class="skel skel-wide"></div>
+                </div>
+              </div>
+            </div>
+            <!-- /#sub-3-3 -->
+
+            <div class="sub-panel" id="sub-3-4" data-section="3" data-sub="3.4">
+              <div class="placeholder-block">
+                <i class="fa-solid fa-4 placeholder-icon"></i>
+                <h4>
+                  3.4 — Tay số 4 (OD — dải D) — Số truyền tăng, giảm tua máy
+                </h4>
+                <p class="placeholder-hint">
+                  ✏️ Chèn: Sơ đồ dòng lực OD, phần tử gài, điều kiện kích hoạt
+                  OD, tỉ số truyền i₄ &lt; 1. Phân tích lợi ích tiết kiệm nhiên
+                  liệu.
+                </p>
+                <div class="placeholder-skeleton">
+                  <div class="skel skel-wide"></div>
+                  <div class="skel skel-short"></div>
+                  <div class="skel skel-mid"></div>
+                </div>
+              </div>
+            </div>
+            <!-- /#sub-3-4 -->
+
+            <div class="sub-panel" id="sub-3-5" data-section="3" data-sub="3.5">
+              <div class="placeholder-block">
+                <i class="fa-solid fa-rotate-left placeholder-icon"></i>
+                <h4>3.5 — Tay số lùi (R) — Đảo chiều quay đầu ra</h4>
+                <p class="placeholder-hint">
+                  ✏️ Chèn: Sơ đồ dòng lực số lùi, phần tử gài B3 và C3, cơ chế
+                  đảo chiều quay đầu ra qua bộ bánh răng hành tinh.
+                </p>
+                <div class="placeholder-skeleton">
+                  <div class="skel skel-wide"></div>
+                  <div class="skel skel-mid"></div>
+                </div>
+              </div>
+            </div>
+            <!-- /#sub-3-5 -->
+
+            <div class="sub-panel" id="sub-3-6" data-section="3" data-sub="3.6">
+              <div class="placeholder-block">
+                <i class="fa-solid fa-calculator placeholder-icon"></i>
+                <h4>3.6 — Tính toán tỉ số truyền các tay số</h4>
+                <p class="placeholder-hint">
+                  ✏️ Chèn: Công thức tính i từ bánh răng hành tinh, bảng giá trị
+                  tỉ số truyền thực tế U340E cho từng tay số (i₁, i₂, i₃, i₄,
+                  iR).
+                </p>
+                <div class="placeholder-skeleton">
+                  <div class="skel skel-wide"></div>
+                  <div class="skel skel-wide"></div>
+                  <div class="skel skel-mid"></div>
+                </div>
+              </div>
+            </div>
+            <!-- /#sub-3-6 -->
+
+            <!-- ╔══════════════════════════════════╗
+               ║  SECTION 4 — Quy trình tháo lắp  ║
+               ╚══════════════════════════════════╝ -->
+            <div class="sub-panel" id="sub-4-1" data-section="4" data-sub="4.1">
+              <div class="placeholder-block">
+                <i class="fa-solid fa-wrench placeholder-icon"></i>
+                <h4>4.1 — Quy trình Tháo</h4>
+                <p class="placeholder-hint">
+                  ✏️ Chèn: Danh sách các bước tháo rời theo thứ tự, dụng cụ cần
+                  thiết, lưu ý kỹ thuật
+                </p>
+                <div class="placeholder-skeleton">
+                  <div class="skel skel-wide"></div>
+                  <div class="skel skel-mid"></div>
+                  <div class="skel skel-wide"></div>
+                  <div class="skel skel-short"></div>
+                </div>
+              </div>
+            </div>
+            <!-- /#sub-4-1 -->
+
+            <div class="sub-panel" id="sub-4-2" data-section="4" data-sub="4.2">
+              <div class="placeholder-block">
+                <i class="fa-solid fa-hammer placeholder-icon"></i>
+                <h4>4.2 — Quy trình Lắp</h4>
+                <p class="placeholder-hint">
+                  ✏️ Chèn: Các bước lắp ráp, momen siết tiêu chuẩn (N·m), thứ tự
+                  lắp cụm bánh răng hành tinh
+                </p>
+                <div class="placeholder-skeleton">
+                  <div class="skel skel-wide"></div>
+                  <div class="skel skel-mid"></div>
+                  <div class="skel skel-wide"></div>
+                </div>
+              </div>
+            </div>
+            <!-- /#sub-4-2 -->
+
+            <!-- ╔════════════════════════════════════════════════╗
+               ║  SECTION 5 — Chẩn đoán lỗi (màu ACCENT)      ║
+               ╚════════════════════════════════════════════════╝ -->
+            <div
+              class="sub-panel sub-panel--accent"
+              id="sub-5-1"
+              data-section="5"
+              data-sub="5.1"
+            >
+              <div class="placeholder-block placeholder-block--accent">
+                <i
+                  class="fa-solid fa-triangle-exclamation placeholder-icon"
+                  style="color: var(--accent)"
+                ></i>
+                <h4>5 — Chẩn đoán Lỗi &amp; Hướng Bảo dưỡng</h4>
+                <p class="placeholder-hint">
+                  ✏️ Chèn: Bảng DTC codes (P07xx), triệu chứng (giật số, trượt
+                  số, không vào số...), nguyên nhân &amp; hướng xử lý chi tiết,
+                  giá trị áp suất kiểm tra
+                </p>
+                <div class="placeholder-skeleton">
+                  <div class="skel skel-wide"></div>
+                  <div class="skel skel-mid"></div>
+                  <div class="skel skel-wide"></div>
+                  <div class="skel skel-short"></div>
+                  <div class="skel skel-wide"></div>
+                </div>
+              </div>
+            </div>
+            <!-- /#sub-5-1 -->
+          </div>
+          <!-- /#content-body -->
+
+          <!-- Navigation Prev / Next giữa các sub-section -->
+          <div class="content-nav-bar" id="content-nav-bar">
+            <button
+              class="btn-subnav"
+              id="btn-prev"
+              onclick="navigateSub(-1)"
+              disabled
+            >
+              <i class="fa-solid fa-chevron-left"></i> Mục trước
+            </button>
+            <span class="subnav-indicator" id="subnav-indicator">1 / 1</span>
+            <button class="btn-subnav" id="btn-next" onclick="navigateSub(1)">
+              Mục tiếp <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
+        </section>
+        <!-- /.detail-content -->
+      </div>
+      <!-- /.detail-layout -->
+    </main>
+    <!-- /#view-detail -->
+
+    <!-- =====================================================
+       TOAST NOTIFICATION
+  ===================================================== -->
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

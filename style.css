@@ -1,0 +1,1266 @@
+/* =====================================================
+   style.css — Thư viện Kỹ thuật Hộp số U340E
+   ĐH Bách Khoa TP.HCM
+   Tác giả: [Tên nhóm / Sinh viên]
+===================================================== */
+
+/* ─────────────────────────────────────────────────────
+   1. CSS VARIABLES (Brand Colors & Design Tokens)
+───────────────────────────────────────────────────── */
+:root {
+  /* Brand palette ĐH Bách Khoa */
+  --primary: #003f8a; /* Header, nút chính, tiêu đề cấp 1 */
+  --primary-dark: #002d66; /* Hover của primary */
+  --primary-light: #e8f0fb; /* Nền nhẹ tông xanh */
+  --secondary: #0088ce; /* Active, accent xanh nhạt */
+  --secondary-bg: #e3f2fd; /* Nền sub-menu active */
+  --accent: #f57c00; /* Cảnh báo / Chẩn đoán lỗi */
+  --accent-light: #fff3e0; /* Nền nhẹ tông cam */
+  --accent-dark: #e65100; /* Hover accent */
+
+  /* Neutrals */
+  --background: #f4f7f6; /* Nền trang chính */
+  --surface: #ffffff; /* Nền card / panel */
+  --border: #dee4ec; /* Đường viền nhẹ */
+  --text-main: #1a2b3c; /* Văn bản chính */
+  --text-body: #3d4f60; /* Văn bản phụ */
+  --text-muted: #7a8ca0; /* Văn bản mờ */
+  --text-light: #ffffff; /* Chữ trên nền xanh đậm */
+
+  /* Layout */
+  --header-h: 72px;
+  --breadcrumb-h: 36px;
+  --sidebar-w: 260px;
+  --card-radius: 16px;
+  --btn-radius: 8px;
+  --content-max: 1200px;
+
+  /* Shadows */
+  --shadow-card: 0 2px 12px rgba(0, 63, 138, 0.09);
+  --shadow-hover: 0 8px 28px rgba(0, 63, 138, 0.18);
+  --shadow-header: 0 2px 10px rgba(0, 0, 0, 0.15);
+
+  /* Transitions */
+  --t-fast: 0.15s ease;
+  --t-base: 0.25s ease;
+  --t-slow: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ─────────────────────────────────────────────────────
+   2. RESET & BASE
+───────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: "Lexend", sans-serif;
+  background: var(--background);
+  color: var(--text-main);
+  min-height: 100vh;
+  overflow-x: hidden;
+  padding-top: var(--header-h); /* offset sticky header */
+}
+
+ul {
+  list-style: none;
+}
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Focus ring accessible */
+:focus-visible {
+  outline: 3px solid var(--secondary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ─────────────────────────────────────────────────────
+   3. SITE HEADER
+───────────────────────────────────────────────────── */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: var(--primary);
+  box-shadow: var(--shadow-header);
+  transition: box-shadow var(--t-base);
+}
+
+/* ── 3a. Header inner row ── */
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: var(--header-h);
+  gap: 12px;
+}
+
+/* ── 3b. Branding ── */
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.header-logo {
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--text-light);
+  font-size: 20px;
+}
+
+/* Slow spin for the gear icon */
+.fa-gear {
+  animation: spin-slow 8s linear infinite;
+}
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.header-titles {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.header-sup {
+  font-family: "Lexend", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.65);
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.header-main {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: clamp(16px, 2.2vw, 22px);
+  font-weight: 600;
+  color: var(--text-light);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.header-main strong {
+  font-weight: 800;
+  color: #90caf9;
+}
+
+/* ── 3c. Back button ── */
+.btn-back {
+  display: none; /* JS toggles to flex */
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  border-radius: var(--btn-radius);
+  background: transparent;
+  color: var(--text-light);
+  font-size: 14px;
+  font-weight: 500;
+  transition:
+    background var(--t-fast),
+    border-color var(--t-fast);
+  white-space: nowrap;
+  min-height: 44px; /* touch-friendly */
+}
+
+.btn-back:active,
+.btn-back:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* ── 3d. Breadcrumb bar ── */
+.breadcrumb-bar {
+  display: none; /* JS shows when in detail */
+  background: var(--primary-dark);
+  padding: 0 20px;
+  height: var(--breadcrumb-h);
+  align-items: center;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+}
+
+.bc-item {
+  color: rgba(255, 255, 255, 0.72);
+  transition: color var(--t-fast);
+}
+
+.bc-home {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: inherit;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.bc-home:hover {
+  color: #fff;
+}
+
+.bc-sep {
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 10px;
+}
+
+.bc-current {
+  color: #90caf9;
+  font-weight: 500;
+}
+
+/* ── 3e. Mobile horizontal sub-menu ── */
+.mobile-submenu {
+  display: none; /* JS toggles; visible on mobile in detail view */
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  white-space: nowrap;
+  padding: 8px 12px;
+  gap: 8px;
+  background: var(--primary-dark);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  scrollbar-width: none; /* Firefox */
+}
+
+.mobile-submenu::-webkit-scrollbar {
+  display: none;
+}
+
+.mobile-sub-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  transition:
+    background var(--t-fast),
+    color var(--t-fast);
+  min-height: 36px;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.mobile-sub-btn.active {
+  background: var(--secondary-bg);
+  color: var(--primary);
+  border-color: var(--secondary);
+  font-weight: 600;
+}
+
+.mobile-sub-btn:active {
+  transform: scale(0.97);
+  transition: transform var(--t-fast);
+}
+
+/* ─────────────────────────────────────────────────────
+   4. VIEW SYSTEM (SPA transitions)
+───────────────────────────────────────────────────── */
+.view {
+  display: none;
+  opacity: 0;
+  transform: translateX(24px);
+  transition:
+    opacity var(--t-slow),
+    transform var(--t-slow);
+  min-height: calc(100vh - var(--header-h));
+}
+
+.view.is-active {
+  display: block;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* When breadcrumb is visible, push content down */
+body.in-detail .view {
+  padding-top: 0;
+}
+
+/* ─────────────────────────────────────────────────────
+   5. HOME DASHBOARD
+───────────────────────────────────────────────────── */
+
+/* ── 5a. Hero Banner ── */
+.hero-banner {
+  background: linear-gradient(
+    135deg,
+    var(--primary) 0%,
+    #005ab5 60%,
+    #0077d4 100%
+  );
+  color: var(--text-light);
+  padding: 40px 24px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative background grid */
+.hero-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 620px;
+}
+
+.hero-eyebrow {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-title {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 14px;
+}
+
+.hero-title span {
+  display: block;
+  font-size: clamp(18px, 3vw, 28px);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.hero-desc {
+  font-size: 15px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.6;
+  max-width: 480px;
+}
+
+/* Hero badge (decorative) */
+.hero-badge {
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.badge-ring {
+  width: 110px;
+  height: 110px;
+  border: 3px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(4px);
+  position: relative;
+}
+
+.badge-ring::before {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.badge-code {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 0.05em;
+}
+
+.badge-sub {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ── 5b. Stats bar ── */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.stat-item {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  border-right: 1px solid var(--border);
+}
+
+.stat-item:last-child {
+  border-right: none;
+}
+
+.stat-val {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-align: center;
+  font-weight: 400;
+}
+
+/* ── 5c. Dashboard Grid ── */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 28px 24px;
+  max-width: var(--content-max);
+  margin: 0 auto;
+}
+
+/* Last 2 cards: span for even layout when 5 cards */
+.dashboard-grid .dash-card:nth-child(4),
+.dashboard-grid .dash-card:nth-child(5) {
+  /* On 3-col: 4th and 5th naturally go to row 2 */
+}
+
+/* ── 5d. Dash Card ── */
+.dash-card {
+  background: var(--surface);
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow-card);
+  border: 1.5px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition:
+    transform var(--t-base),
+    box-shadow var(--t-base),
+    border-color var(--t-base);
+  -webkit-tap-highlight-color: transparent;
+  min-height: 200px;
+}
+
+.dash-card:hover {
+  box-shadow: var(--shadow-hover);
+  border-color: var(--secondary);
+  transform: translateY(-3px);
+}
+
+.dash-card:active {
+  transform: scale(0.97) translateY(0);
+  transition: transform 0.15s ease;
+}
+
+/* Accent bar (top border indicator) */
+.card-accent-bar {
+  height: 4px;
+  background: var(--bar-color, var(--primary));
+  width: 100%;
+  flex-shrink: 0;
+}
+
+/* Icon wrapper */
+.card-icon-wrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: var(--icon-bg, var(--primary-light));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin: 20px 20px 0;
+  flex-shrink: 0;
+  transition: transform var(--t-base);
+}
+
+.dash-card:hover .card-icon-wrap {
+  transform: scale(1.08) rotate(-3deg);
+}
+
+/* Card body */
+.card-body {
+  flex: 1;
+  padding: 12px 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.card-num {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.card-title {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: clamp(17px, 2vw, 21px);
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.2;
+}
+
+.card-desc {
+  font-size: 13px;
+  color: var(--text-body);
+  line-height: 1.55;
+  flex: 1;
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 4px;
+}
+
+.card-tags li {
+  font-size: 11px;
+  padding: 3px 9px;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  color: var(--text-muted);
+  font-weight: 500;
+  transition:
+    background var(--t-fast),
+    color var(--t-fast);
+}
+
+.dash-card:hover .card-tags li {
+  background: var(--primary-light);
+  color: var(--primary);
+  border-color: #c5d9f5;
+}
+
+/* Arrow button */
+.card-arrow {
+  position: absolute;
+  bottom: 18px;
+  right: 18px;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: var(--text-muted);
+  transition:
+    background var(--t-base),
+    color var(--t-base),
+    transform var(--t-base);
+}
+
+.dash-card:hover .card-arrow {
+  background: var(--primary);
+  color: #fff;
+  transform: translateX(3px);
+}
+
+/* ── Card 5 Accent variant ── */
+.dash-card--accent .card-num {
+  color: var(--accent);
+}
+.dash-card--accent .card-title {
+  color: var(--accent-dark);
+}
+.dash-card--accent:hover {
+  border-color: var(--accent);
+}
+.dash-card--accent:hover .card-arrow {
+  background: var(--accent);
+}
+.dash-card--accent:hover .card-tags li {
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  border-color: #ffcc80;
+}
+
+/* ── 5e. Home footer ── */
+.home-footer {
+  text-align: center;
+  padding: 20px 24px 32px;
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+.home-footer i {
+  color: var(--secondary);
+  margin-right: 4px;
+}
+
+/* ─────────────────────────────────────────────────────
+   6. DETAIL PAGE LAYOUT
+───────────────────────────────────────────────────── */
+.detail-layout {
+  display: grid;
+  grid-template-columns: var(--sidebar-w) 1fr;
+  min-height: calc(100vh - var(--header-h));
+  align-items: start;
+}
+
+/* ── 6a. Sidebar (desktop) ── */
+.detail-sidebar {
+  position: sticky;
+  top: var(--header-h);
+  height: calc(100vh - var(--header-h));
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+  -webkit-overflow-scrolling: touch;
+}
+
+.detail-sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+.detail-sidebar::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+.sidebar-header {
+  padding: 18px 20px 14px;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.sidebar-nav {
+  padding: 10px 10px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+/* Sidebar nav button */
+.sidebar-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 14px;
+  border-radius: var(--btn-radius);
+  background: none;
+  border: 1.5px solid transparent;
+  color: var(--text-body);
+  font-size: 13.5px;
+  font-family: inherit;
+  font-weight: 400;
+  cursor: pointer;
+  transition:
+    background var(--t-fast),
+    color var(--t-fast),
+    border-color var(--t-fast);
+  text-align: left;
+  min-height: 48px; /* touch-friendly */
+  width: 100%;
+  position: relative;
+}
+
+.sidebar-btn .sub-num {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  min-width: 28px;
+  flex-shrink: 0;
+  transition: color var(--t-fast);
+}
+
+.sidebar-btn .sub-label {
+  flex: 1;
+  line-height: 1.35;
+}
+
+.sidebar-btn:hover {
+  background: var(--secondary-bg);
+  color: var(--primary);
+}
+
+.sidebar-btn:hover .sub-num {
+  color: var(--secondary);
+}
+
+.sidebar-btn.active {
+  background: var(--primary-light);
+  color: var(--primary);
+  border-color: #c5d9f5;
+  font-weight: 600;
+}
+
+.sidebar-btn.active .sub-num {
+  color: var(--primary);
+}
+
+.sidebar-btn.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 60%;
+  background: var(--primary);
+  border-radius: 0 3px 3px 0;
+}
+
+/* Accent section sidebar */
+.sidebar-btn.accent-btn.active {
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  border-color: #ffcc80;
+}
+
+.sidebar-btn.accent-btn.active::before {
+  background: var(--accent);
+}
+
+.sidebar-btn:active {
+  transform: scale(0.97);
+}
+
+/* ── 6b. Detail Content Area ── */
+.detail-content {
+  padding: 28px 32px 48px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  min-height: calc(100vh - var(--header-h));
+}
+
+/* Content header (icon + title) */
+.content-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--border);
+}
+
+.content-icon-wrap {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: var(--primary-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.content-section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--secondary);
+  margin-bottom: 4px;
+}
+
+.content-title {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.15;
+}
+
+/* ─────────────────────────────────────────────────────
+   7. SUB-PANELS (Content placeholder blocks)
+───────────────────────────────────────────────────── */
+.content-body {
+  position: relative;
+}
+
+/* Each sub-panel: hidden by default, JS shows active one */
+.sub-panel {
+  display: none;
+  animation: fadeSlideIn var(--t-slow) both;
+}
+
+.sub-panel.is-active {
+  display: block;
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Placeholder block (remove when inserting real content) */
+.placeholder-block {
+  background: var(--surface);
+  border: 2px dashed var(--border);
+  border-radius: var(--card-radius);
+  padding: 40px 32px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.placeholder-block h4 {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.placeholder-icon {
+  font-size: 40px;
+  color: var(--border);
+  margin-bottom: 4px;
+}
+
+.placeholder-hint {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-style: italic;
+  background: var(--background);
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  max-width: 480px;
+  line-height: 1.6;
+}
+
+/* Skeleton shimmer lines */
+.placeholder-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 500px;
+  margin-top: 8px;
+}
+
+.skel {
+  height: 14px;
+  background: linear-gradient(90deg, #e8edf3 25%, #f4f7f6 50%, #e8edf3 75%);
+  background-size: 200% 100%;
+  border-radius: 7px;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.skel-wide {
+  width: 100%;
+}
+.skel-mid {
+  width: 72%;
+}
+.skel-short {
+  width: 48%;
+}
+
+/* Accent variant (Section 5) */
+.sub-panel--accent .placeholder-block {
+  border-color: #ffcc80;
+  background: #fffbf6;
+}
+
+.placeholder-block--accent h4 {
+  color: var(--accent-dark);
+}
+
+.placeholder-block--accent .placeholder-hint {
+  background: var(--accent-light);
+  border-color: #ffe0b2;
+}
+
+/* ─────────────────────────────────────────────────────
+   7b. CONTENT TABLE
+───────────────────────────────────────────────────── */
+.table-responsive {
+  overflow-x: auto;
+  margin: 24px 0;
+}
+
+.content-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 14px;
+  color: var(--text-main);
+}
+
+.content-table caption {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 10px;
+  text-align: center;
+  color: var(--text-main);
+  caption-side: top;
+}
+
+.content-table th,
+.content-table td {
+  border: 1px solid #000;
+  padding: 10px 12px;
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+.content-table thead th {
+  font-weight: 600;
+  text-align: left;
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+/* ─────────────────────────────────────────────────────
+   8. CONTENT NAV BAR (Prev / Next)
+───────────────────────────────────────────────────── */
+.content-nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 36px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  gap: 12px;
+}
+
+.btn-subnav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--btn-radius);
+  color: var(--text-body);
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: 500;
+  min-height: 48px; /* touch-friendly */
+  transition:
+    background var(--t-fast),
+    border-color var(--t-fast),
+    color var(--t-fast),
+    transform var(--t-fast);
+}
+
+.btn-subnav:hover:not(:disabled) {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.btn-subnav:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.btn-subnav:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.subnav-indicator {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+}
+
+/* ─────────────────────────────────────────────────────
+   9. TOAST NOTIFICATION
+───────────────────────────────────────────────────── */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: #1a2b3c;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 40px;
+  font-size: 13.5px;
+  font-weight: 500;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+  z-index: 999;
+  white-space: nowrap;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ─────────────────────────────────────────────────────
+   10. BODY STATE CLASSES (controlled by JS)
+───────────────────────────────────────────────────── */
+
+/* When in detail: adjust body padding for breadcrumb */
+body.in-detail {
+  padding-top: calc(var(--header-h) + var(--breadcrumb-h));
+}
+
+/* ─────────────────────────────────────────────────────
+   11. RESPONSIVE — Tablet (≤ 900px)
+───────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 20px 16px;
+    gap: 14px;
+  }
+
+  /* 5th card spans full width */
+  .dashboard-grid .dash-card:nth-child(5) {
+    grid-column: 1 / -1;
+  }
+
+  .detail-layout {
+    grid-template-columns: 1fr;
+  }
+
+  /* Hide desktop sidebar on tablet/mobile */
+  .detail-sidebar {
+    display: none;
+  }
+
+  /* Show mobile submenu instead */
+  body.in-detail .mobile-submenu {
+    display: flex;
+  }
+
+  /* Detail content: full width, no left padding for sidebar */
+  .detail-content {
+    padding: 24px 18px 40px;
+  }
+
+  /* Adjust padding for mobile sub-menu height */
+  body.in-detail {
+    padding-top: calc(var(--header-h) + var(--breadcrumb-h) + 56px);
+  }
+}
+
+/* ─────────────────────────────────────────────────────
+   12. RESPONSIVE — Mobile (≤ 560px)
+───────────────────────────────────────────────────── */
+@media (max-width: 560px) {
+  :root {
+    --header-h: 64px;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    padding: 16px 14px;
+  }
+
+  /* All cards single column on mobile */
+  .dashboard-grid .dash-card:nth-child(5) {
+    grid-column: auto;
+  }
+
+  .header-sup {
+    display: none;
+  }
+
+  .hero-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 28px 18px 24px;
+  }
+
+  .hero-badge {
+    align-self: center;
+  }
+
+  .stats-bar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stat-item:nth-child(2) {
+    border-right: none;
+  }
+  .stat-item:nth-child(3) {
+    border-top: 1px solid var(--border);
+  }
+  .stat-item:nth-child(4) {
+    border-top: 1px solid var(--border);
+  }
+
+  .content-nav-bar {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .btn-back span {
+    display: none;
+  }
+  .btn-back {
+    padding: 10px 14px;
+  }
+
+  .detail-content {
+    padding: 20px 14px 36px;
+  }
+
+  .placeholder-block {
+    padding: 28px 18px;
+  }
+}
+
+/* ─────────────────────────────────────────────────────
+   13. PRINT STYLES (optional)
+───────────────────────────────────────────────────── */
+@media print {
+  .site-header,
+  .btn-back,
+  .detail-sidebar,
+  .mobile-submenu,
+  .breadcrumb-bar,
+  .content-nav-bar,
+  .toast {
+    display: none !important;
+  }
+
+  body {
+    padding-top: 0;
+    background: #fff;
+    color: #000;
+  }
+
+  .view {
+    display: block !important;
+    opacity: 1;
+    transform: none;
+  }
+
+  .sub-panel {
+    display: block !important;
+  }
+
+  .placeholder-block {
+    border: 1px solid #ccc;
+    break-inside: avoid;
+  }
+}
